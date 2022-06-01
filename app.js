@@ -13,11 +13,11 @@ const PORT = process.env.PORT || 5000;
 
 // 서버로부터 넘어온 내용을 on 이란 함수로 사용
 io.on("connection", (socket) => {
-    console.log("연결이 되었습니다.");
+    // console.log("연결이 되었습니다.");
     // socket.on(a, b)
     // a 첫번째 채팅아이디, b 클라이언트 넘어온 값
     socket.on("chatting", (data) => {
-        console.log(data);
+        // console.log(data);
         io.emit("chatting", data);
     });
 });

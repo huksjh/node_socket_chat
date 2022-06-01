@@ -4,16 +4,32 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
         <title>Document</title>
     </head>
     <body>
-        <div class="wraper">
-            <div class="user-container">대화명 : <input type="text" name="nickname" id="nickname" /></div>
+        <div class="wrapper">
+            <div class="user-container">
+                <label for="">대화명</label>
+                <input type="text" name="nickname" id="nickname" />
+            </div>
             <div class="display-container">
-                <ul class="chatting-list"></ul>
+                <ul class="chatting-list">
+                    <li>
+                        <span class="profile">
+                            <span>머라구</span>
+                            <img src="https://placeimg.com/50/50/any" alt="any" srcset=""
+                        /></span>
+                        <div class="message">
+                            안녕하세요 안녕하세요<br />
+                            안녕하세요 안녕하세요 <br />안녕하세요<br />안녕하세요
+                        </div>
+                        <span class="time">오후 3:32</span>
+                    </li>
+                </ul>
             </div>
             <div class="input-container">
-                <input type="text" class="chatting-input" />
+                <textarea class="chatting-input"></textarea>
                 <button class="send-button">전송</button>
             </div>
         </div>

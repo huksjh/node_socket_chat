@@ -32,7 +32,7 @@ sendButton.addEventListener("click", (e) => {
 // 서버에서 -> 클라이언드 받아오기
 socket.on("chatting", (data) => {
     // data 서버에서 받아온 내용
-    console.log(data);
+    // console.log(data);
     const { name, message } = data;
     const li = document.createElement("li");
 
