@@ -6,8 +6,15 @@ const nickName = document.querySelector("#nickname");
 const chattingList = document.querySelector(".chatting-list");
 const chattingInput = document.querySelector(".chatting-input");
 const sendButton = document.querySelector(".send-button");
+const displayContainer = document.querySelector(".display-container");
 
 sendButton.addEventListener("click", (e) => {
+    if (nickname.value == "") {
+        alert("닉네임을 입력하세요");
+        nickname.focus();
+        return false;
+    }
+
     if (chattingInput.value == "") {
         alert("전송할 내용을 입력하세요");
         chattingInput.focus();
@@ -32,10 +39,36 @@ sendButton.addEventListener("click", (e) => {
 // 서버에서 -> 클라이언드 받아오기
 socket.on("chatting", (data) => {
     // data 서버에서 받아온 내용
-    // console.log(data);
-    const { name, message } = data;
-    const li = document.createElement("li");
+    const { name, message, time } = data;
 
-    li.innerText = `${name}님의 내용 -> ${message}`;
-    chattingList.appendChild(li);
+    const item = new LiMake(name, message, time);
+    item.makeLi();
+
+    // 스크롤 하단으로 이동
+    displayContainer.scrollTop = displayContainer.scrollHeight;
 });
+
+// li 생성
+function LiMake(name, message, time) {
+    this.name = name;
+    this.msg = message;
+    this.time = time;
+
+    this.makeLi = () => {
+        const li = document.createElement("li");
+        li.classList.add(nickName.value == this.name ? "sent" : "recived");
+
+        const dom = `
+        <div class="thumb"><img src="https://placeimg.com/50/50/any" alt="any" srcset="" /></div>
+        <div class="messageWrap">
+            <span class="profile">${this.name}</span>
+            <span>
+                <span class="message">${this.msg.replaceAll("\n", "<br/>")}</span>
+                <span class="time">${this.time}</span>
+            </span>
+        </div>
+        `;
+        li.innerHTML = dom;
+        chattingList.appendChild(li);
+    };
+}

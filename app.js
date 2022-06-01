@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const server = http.createServer(app);
 const socketIO = require("socket.io");
+const moment = require("moment");
 
 // socket.io 에  server 정보를 담아 사용
 const io = socketIO(server);
@@ -17,8 +18,10 @@ io.on("connection", (socket) => {
     // socket.on(a, b)
     // a 첫번째 채팅아이디, b 클라이언트 넘어온 값
     socket.on("chatting", (data) => {
-        // console.log(data);
-        io.emit("chatting", data);
+        //const { } = data;
+        const datas = { time: moment().format("A HH:mm"), ...data };
+
+        io.emit("chatting", datas);
     });
 });
 
